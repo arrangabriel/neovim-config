@@ -40,18 +40,23 @@ return {
                 enable_refresh_on_write = true,
                 popup_border_style = "single", -- "double", "none", "rounded", "shadow", "single" or "solid"
                 default_component_configs = {
-                    git_status = { symbols = { renamed = "󰑕", unstaged = "󰏫", } },
+                    git_status = {
+                        symbols = {
+                            added    = "",
+                            deleted  = "",
+                            modified = "",
+                            renamed  = "",
+                            unstaged = "󰏫"
+                        }
+                    },
                     icon = { folder_empty = "" }
                 },
-                source_selector = { statusline = false },              -- TODO add statusline
                 commands = { example = function() print "hello" end }, -- available everywhere
                 window = {
-                    width = 35,
+                    width = 30,
                     mapping_options = { noremap = true, nowait = true },
                     mappings = {
                         ["P"] = { "toggle_preview", config = { use_float = true } },
-                        ["t"] = "open_tabnew",
-                        ["z"] = "close_all_nodes",
                         ["a"] = { "add", config = { show_path = "relative" } },
                         ["c"] = { "copy", config = { show_path = "relative" } },
                         ["m"] = { "move", config = { show_path = "relative" } },
@@ -66,7 +71,6 @@ return {
                         },
                     },
                     buffers = {
-                        follow_current_file = true,
                         group_empty_dirs = true,
                         show_unloaded = true,
                     }
@@ -84,5 +88,68 @@ return {
     {
         "shaunsingh/nord.nvim",
         init = function() vim.cmd.colorscheme("nord") end
+    },
+    {
+        "nvim-lualine/lualine.nvim",
+        init = function()
+            CreateKeymap(
+                "n", "<leader>j",
+                function() vim.cmd("LualineBuffersJump! " .. vim.v.count) end,
+                { desc = "jump to buffer" }
+            )
+        end,
+        config = function()
+            require("lualine").setup({
+                options = {
+                    icons_enabled = true,
+                    theme = "auto",
+                    component_separators = { left = "", right = "" },
+                    section_separators = { left = "", right = "" },
+                    ignore_focus = { "neo-tree", "neo-tree-popup" },
+                    always_divide_middle = true,
+                    globalstatus = true,
+                    refresh = {
+                        statusline = 1000,
+                        tabline = 1000,
+                        winbar = 1000,
+                    }
+                },
+                sections = {
+                    lualine_a = { "mode" },
+                    lualine_b = {
+                        {
+                            "filetype",
+                            icon_only = true,
+                            separator = ""
+                        },
+                        { "filename", padding = { left = 0, right = 1 } },
+                        "diagnostics"
+                    },
+                    lualine_c = {},
+                    lualine_x = {
+                        {
+                            "buffers",
+                            icons_enabled = false,
+                            show_modified_status = false,
+                            mode = 2,
+                            symbols = { alternate_file = "" }
+                        }, },
+                    lualine_y = { "searchcount", "location", "diff" },
+                    lualine_z = { "branch" }
+                },
+                inactive_sections = {
+                    lualine_a = {},
+                    lualine_b = {},
+                    lualine_c = {},
+                    lualine_x = { "location" },
+                    lualine_y = {},
+                    lualine_z = {}
+                },
+                tabline = {},
+                winbar = {},
+                inactive_winbar = {},
+                extensions = {}
+            })
+        end
     }
 }

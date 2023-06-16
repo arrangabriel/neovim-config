@@ -12,8 +12,10 @@ SetOption("tabstop", 4)
 SetOption("shiftwidth", 4)
 SetOption("expandtab", true)
 
+SetVariable("laststatus", 3)
 SetVariable("loaded_netrw", 1)
 SetVariable("loaded_netrwPlugin", 1)
+
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
