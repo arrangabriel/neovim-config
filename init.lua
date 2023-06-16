@@ -29,3 +29,5 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins")
+
+SetVariable("neo_tree_remove_legacy_commands", 1)
