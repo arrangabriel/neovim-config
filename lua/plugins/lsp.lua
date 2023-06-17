@@ -1,27 +1,5 @@
 return {
     {
-        "tpope/vim-repeat",
-    },
-    {
-        "folke/which-key.nvim",
-        config = function()
-            vim.o.timeout = true
-            vim.o.timeoutlen = 300
-            require("which-key").setup({})
-        end
-    },
-    {
-        "ggandor/leap.nvim",
-        config = function()
-            require('leap').add_default_mappings(true)
-        end
-    },
-    {
-        "nvim-telescope/telescope.nvim",
-        tag = "0.1.1",
-        dependencies = { "nvim-lua/plenary.nvim" }
-    },
-    {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v1.x',
         dependencies = {
