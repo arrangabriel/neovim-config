@@ -1,4 +1,15 @@
+local null_ls_config = {
+    "jose-elias-alvarez/null-ls.nvim",
+    config = function()
+        local null_ls = require("null-ls")
+        null_ls.setup {
+            sources = { null_ls.builtins.formatting.prettier }
+        }
+    end
+}
+
 return {
+    null_ls_config,
     {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v1.x',
@@ -27,13 +38,16 @@ return {
                 suggest_lsp_servers = true,
             }
 
-            lsp.format_on_save({
+            lsp.format_on_save {
                 format_opts = {
                     async = false,
                     timeout_ms = 10000,
                 },
-                servers = { ['lua_ls'] = { 'lua' }, }
-            })
+                servers = {
+                    ['lua_ls'] = { 'lua' },
+                    ['null-ls'] = { 'javascript', 'typescript' }
+                }
+            }
 
             lsp.setup()
 
