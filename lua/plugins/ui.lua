@@ -67,18 +67,24 @@ local neotree_config = {
                     ["m"] = { "move", config = { show_path = "relative" } },
                     ["<esc>"] = "close_window"
                 },
-                filesystem = {
-                    follow_current_file = true,
-                    filtered_items = {
-                        hide_gitignored = false,
-                        hide_by_pattern = { ".idea/*" },
-                        never_show = { ".DS_Store" },
-                    },
+            },
+            filesystem = {
+                follow_current_file = true,
+                group_empty_dirs = true,
+                filtered_items = {
+                    hide_gitignored = false,
+                    hide_by_pattern = { ".idea/*" },
                 },
-                buffers = {
-                    group_empty_dirs = true,
-                    show_unloaded = true,
+                window = {
+                    fuzzy_finder_mappings = {
+                        ["<C-k>"] = "move_cursor_up",
+                        ["<C-j>"] = "move_cursor_down",
+                    }
                 }
+            },
+            buffers = {
+                group_empty_dirs = true,
+                show_unloaded = true,
             }
         }
     end
