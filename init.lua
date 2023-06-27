@@ -12,7 +12,6 @@ SetOption("tabstop", 4)
 SetOption("shiftwidth", 4)
 SetOption("expandtab", true)
 
-SetVariable("laststatus", 3)
 SetVariable("loaded_netrw", 1)
 SetVariable("loaded_netrwPlugin", 1)
 

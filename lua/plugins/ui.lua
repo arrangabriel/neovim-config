@@ -163,9 +163,17 @@ local indent_blankline_config = {
     end
 }
 
+local nord_config = {
+    "shaunsingh/nord.nvim",
+    init = function()
+        SetVariable("nord_borders", true)
+        vim.cmd.colorscheme("nord")
+    end
+}
+
 return {
     neotree_config,
     lualine_config,
     indent_blankline_config,
-    { "shaunsingh/nord.nvim", init = function() vim.cmd.colorscheme("nord") end },
+    nord_config
 }
