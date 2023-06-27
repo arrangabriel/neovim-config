@@ -3,7 +3,10 @@ local null_ls_config = {
     config = function()
         local null_ls = require("null-ls")
         null_ls.setup {
-            sources = { null_ls.builtins.formatting.prettier }
+            sources = {
+                null_ls.builtins.formatting.prettier,
+                --null_ls.builtins.formatting.black
+            }
         }
     end
 }
@@ -45,22 +48,25 @@ return {
                 },
                 servers = {
                     ['lua_ls'] = { 'lua' },
-                    ['null-ls'] = { 'javascript', 'typescript' }
+                    ['null-ls'] = { 'javascript', 'typescript' },
+                    ['pylsp'] = { 'python' },
                 }
             }
 
             lsp.setup()
 
-            vim.diagnostic.config({
+            vim.diagnostic.config {
                 virtual_text = true,
                 signs = true,
                 update_in_insert = false,
                 underline = true,
                 severity_sort = false,
                 float = true,
-            })
+            }
 
-            require("lspconfig").lua_ls.setup {
+            local lspconfig = require("lspconfig")
+
+            lspconfig.lua_ls.setup {
                 settings = {
                     Lua = {
                         diagnostics = {
@@ -71,6 +77,25 @@ return {
                         },
                     },
                 },
+            }
+
+            lspconfig.pylsp.setup {
+                settings = {
+                    formatCommand = { "black" },
+                    pylsp = {
+                        plugins = {
+                            black = { enabled = true, line_length = 90 },
+                            pycodestyle = {
+                                enabled = true,
+                                ignore = {
+                                    "E501",
+                                    "E231"
+                                },
+                                maxLineLength = 90
+                            },
+                        }
+                    }
+                }
             }
         end
     }
