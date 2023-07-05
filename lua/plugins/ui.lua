@@ -2,6 +2,7 @@
 --   Neotree          - file browser
 --   Lualine          - fancy statusline
 --   Indent_blankline - indentation guiding lines
+--   Vim_floaterm     - floating terminal window
 --   Nord             - theme
 
 require("utils")
@@ -163,6 +164,23 @@ local indent_blankline_config = {
     end
 }
 
+local vim_floaterm_config = {
+    "voldikss/vim-floaterm",
+    keys = {
+        {
+            "<C-t>",
+            "<cmd>FloatermToggle<cr>",
+            mode = { "n", "t", },
+            desc = "Toggle floating terminal"
+        }
+    },
+    config = function()
+        SetVariable("floaterm_title", "") --"term: $1/$2")
+        SetVariable("floaterm_width", 0.8)
+        SetVariable("floaterm_height", 0.8)
+    end
+}
+
 local nord_config = {
     "shaunsingh/nord.nvim",
     init = function()
@@ -175,5 +193,6 @@ return {
     neotree_config,
     lualine_config,
     indent_blankline_config,
+    vim_floaterm_config,
     nord_config
 }
