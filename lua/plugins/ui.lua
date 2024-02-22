@@ -3,6 +3,7 @@
 --   Lualine          - fancy statusline
 --   Indent_blankline - indentation guiding lines
 --   Vim_floaterm     - floating terminal window
+--   Vim_gitgutter    - inline git changes
 --   Nord             - theme
 
 require("utils")
@@ -181,6 +182,13 @@ local vim_floaterm_config = {
     end
 }
 
+local vim_gitgutter_config = {
+    "airblade/vim-gitgutter",
+    init = function()
+        SetOption("updatetime", 100)
+    end
+}
+
 local nord_config = {
     "shaunsingh/nord.nvim",
     init = function()
@@ -194,5 +202,6 @@ return {
     lualine_config,
     indent_blankline_config,
     vim_floaterm_config,
+    vim_gitgutter_config,
     nord_config
 }
