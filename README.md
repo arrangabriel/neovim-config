@@ -1,10 +1,10 @@
 # Neovim config
 
-This is my personal configuration for a nice Neovim experience. Includes a file browser, lsp-setup, fuzzy finder, visual flair and more.
+This is my personal configuration for a nice Neovim experience.
 
 ## Dependencies
 
-- Neovim version>0.9
+- Neovim version >=0.9
 - A patched [nerd font](https://www.nerdfonts.com/font-downloads)
 
 ## Setup

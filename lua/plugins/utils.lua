@@ -1,24 +1,29 @@
--- Plugins:
---   Vim_repeat   - allows for repeating plugin commands with .
---   Which_key    - hotkey guide
---   Auto_session - automatically restore sessions when running `nvim` command only
-
+-- Keymap help
 local which_key_config = {
-    "folke/which-key.nvim",
-    config = function()
-        vim.o.timeout = true
-        vim.o.timeoutlen = 300
-        require("which-key").setup()
-    end
+	"folke/which-key.nvim",
+	event = "VimEnter",
+	config = function()
+		local plugin = require("which-key")
+		plugin.setup()
+
+		plugin.register({
+			["<leader>t"] = { name = "[T]oggle", _ = "which_key_ignore" },
+			["<leader>s"] = { name = "[S]earch", _ = "which_key_ignore" },
+		})
+	end,
 }
 
-local auto_session_config = {
-    "rmagatti/auto-session",
-    config = function() require("auto-session").setup {} end
+-- Various utility plugins
+local mini_config = {
+	"echasnovski/mini.nvim",
+	config = function()
+		require("mini.surround").setup()
+		--require("mini.statusline").setup { use_icons = true }
+	end,
 }
 
 return {
-    which_key_config,
-    auto_session_config,
-    "tpope/vim-repeat",
+	which_key_config,
+	-- Repeat plugin actions with '.'
+	"tpope/vim-repeat",
 }
