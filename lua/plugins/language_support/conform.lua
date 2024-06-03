@@ -14,6 +14,7 @@ return {
 	opts = {
 		notify_on_error = true,
 		format_on_save = function(bufnr)
+			-- Languages that do not have a "default" style
 			local disable_filetypes = { c = true, cpp = true }
 			return {
 				timeout_ms = 500,

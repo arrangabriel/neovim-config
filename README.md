@@ -11,3 +11,5 @@ This is my personal configuration for a nice Neovim experience.
 
 1. Clone into `$HOME/.config/nvim`
 2. Enjoy
+
+> Acknowledgments to the amazing [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim)!

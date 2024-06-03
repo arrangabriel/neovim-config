@@ -6,7 +6,7 @@ return {
 			"<leader>tc",
 			"<cmd>ColorizerToggle<cr>",
 			mode = { "n" },
-			desc = "Toggle Colorizer",
+			desc = "[C]olorizer",
 		},
 	},
 }
