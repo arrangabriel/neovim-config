@@ -31,6 +31,9 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 -- Command chain timeout
 vim.opt.timeoutlen = 300
 
+-- Highlight faster
+vim.opt.updatetime = 250
+
 -- More natural splits
 vim.opt.splitright = true
 vim.opt.splitbelow = true
@@ -70,6 +73,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 		lazypath,
 	})
 end
+---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({

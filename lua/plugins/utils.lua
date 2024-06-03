@@ -3,12 +3,12 @@ local which_key_config = {
 	"folke/which-key.nvim",
 	event = "VimEnter",
 	config = function()
-		local plugin = require("which-key")
-		plugin.setup()
+		local which_key = require("which-key")
+		which_key.setup()
 
-		plugin.register({
-			["<leader>t"] = { name = "[T]oggle", _ = "which_key_ignore" },
-			["<leader>s"] = { name = "[S]earch", _ = "which_key_ignore" },
+		which_key.register({
+			["<leader>t"] = { name = "[t]oggle", _ = "which_key_ignore" },
+			["<leader>s"] = { name = "[s]earch", _ = "which_key_ignore" },
 		})
 	end,
 }
@@ -24,6 +24,7 @@ local mini_config = {
 
 return {
 	which_key_config,
+	mini_config,
 	-- Repeat plugin actions with '.'
 	"tpope/vim-repeat",
 }

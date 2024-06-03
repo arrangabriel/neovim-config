@@ -8,7 +8,7 @@ return {
 				require("conform").format({ async = true, lsp_fallback = true })
 			end,
 			mode = "",
-			desc = "[F]ormat buffer",
+			desc = "[f]ormat buffer",
 		},
 	},
 	opts = {
@@ -22,6 +22,7 @@ return {
 			}
 		end,
 		formatters_by_ft = {
+			-- add these to the mason config to ensure their installation
 			-- TODO: add more
 			lua = { "stylua" },
 		},
