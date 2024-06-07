@@ -1,12 +1,9 @@
 return {
-	"shaunsingh/nord.nvim",
+	"gbprod/nord.nvim",
+	lazy = false,
 	priority = 1000,
-	init = function()
+	config = function()
+		require("nord").setup()
 		vim.cmd.colorscheme("nord")
-		-- Color inlay hints the same way as comments
-		require("nord.util").highlight("LspInlayHint", {
-			fg = require("nord.colors").nord3_gui_bright,
-			style = "italic",
-		})
 	end,
 }

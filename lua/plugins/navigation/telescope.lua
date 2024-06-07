@@ -41,8 +41,8 @@ return {
 		vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[h]elp" })
 		vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[k]eymaps" })
 		vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[f]iles" })
-		vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[s]elect Telescope" })
-		vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "Current [w]ord" })
+		vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "Telescope" })
+		vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "hovered [w]ord" })
 		vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[g]rep" })
 		vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[d]iagnostics" })
 		vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[r]esume" })
@@ -58,6 +58,6 @@ return {
 
 		vim.keymap.set("n", "<leader>sn", function()
 			builtin.find_files({ cwd = vim.fn.stdpath("config") })
-		end, { desc = "[N]eovim files" })
+		end, { desc = "[n]eovim files" })
 	end,
 }

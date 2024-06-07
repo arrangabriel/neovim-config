@@ -1,3 +1,7 @@
+local utils = require("utils")
+
+-- TODO: https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization
+
 return {
 	"neovim/nvim-lspconfig",
 	dependencies = {
@@ -14,7 +18,7 @@ return {
 			group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
 			callback = function(event)
 				local map = function(keys, func, desc)
-					vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+					utils.map("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 				end
 				-- Jump to the definition(s) of the word under your cursor.
 				map("gd", require("telescope.builtin").lsp_definitions, "[g]oto [d]efinition")
@@ -62,10 +66,6 @@ return {
 					})
 				end
 
-				-- The following autocommand is used to enable inlay hints in your
-				-- code, if the language server you are using supports them
-				--
-				-- This may be unwanted, since they displace some of your code
 				if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
 					vim.lsp.inlay_hint.enable(true)
 					map("<leader>th", function()
@@ -95,8 +95,6 @@ return {
 						completion = {
 							callSnippet = "Replace",
 						},
-						-- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-						-- diagnostics = { disable = { 'missing-fields' } },
 					},
 				},
 			},
@@ -107,8 +105,8 @@ return {
 		-- Add other tools (linters, formatters, etc.) for Mason to install
 		local ensure_installed = vim.tbl_keys(servers or {})
 		vim.list_extend(ensure_installed, {
-			"stylua",
-			"markdownlint",
+			"stylua", -- lua linter and formatter
+			"markdownlint", -- markdown linter
 		})
 
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })

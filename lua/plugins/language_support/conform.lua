@@ -12,7 +12,7 @@ return {
 		},
 	},
 	opts = {
-		notify_on_error = true,
+		notify_on_error = false,
 		format_on_save = function(bufnr)
 			-- Languages that do not have a "default" style
 			local disable_filetypes = { c = true, cpp = true }

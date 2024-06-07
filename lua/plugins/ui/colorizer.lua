@@ -1,12 +1,15 @@
+local utils = require("utils")
+
 return {
 	"norcalli/nvim-colorizer.lua",
-	opts = {},
-	keys = {
-		{
-			"<leader>tc",
-			"<cmd>ColorizerToggle<cr>",
-			mode = { "n" },
-			desc = "[C]olorizer",
-		},
-	},
+	config = function()
+		require("colorizer").setup({
+			"css",
+			html = { mode = "background" },
+		})
+
+		utils.map("n", "<leader>tc", function()
+			vim.cmd([[ColorizerToggle]])
+		end, { desc = "[c]olorizer" })
+	end,
 }
