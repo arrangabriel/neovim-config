@@ -17,9 +17,6 @@ vim.opt.shiftwidth = 4
 -- Indent wrapped lines
 vim.opt.breakindent = true
 
--- Hide mode (replaced by status line)
-vim.opt.showmode = false
-
 -- Save undo history to file
 vim.opt.undofile = true
 

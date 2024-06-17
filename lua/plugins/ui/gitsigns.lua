@@ -11,13 +11,7 @@ return {
 				delay = 500,
 			},
 			on_attach = function(bufnr)
-				local function map(mode, keys, action, desc)
-					local opts = {
-						buffer = bufnr,
-						desc = "Git: " .. desc,
-					}
-					utils.map(mode, keys, action, opts)
-				end
+				local map = utils.map_with_prefix("Git: ", { buffer = bufnr })
 
 				map("n", ">c", function()
 					if vim.wo.diff then

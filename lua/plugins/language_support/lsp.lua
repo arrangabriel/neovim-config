@@ -11,36 +11,40 @@ return {
 		-- Status notifications
 		{ "j-hui/fidget.nvim", opts = {} },
 		-- Lua Neovim integration
-		{ "folke/neodev.nvim", opts = {} },
+		{ "folke/lazydev.nvim", opts = {} },
 	},
 	config = function()
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
 			callback = function(event)
-				local map = function(keys, func, desc)
-					utils.map("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
-				end
+				local map = utils.map_with_prefix("LSP: ", { buffer = event.buf })
+
 				-- Jump to the definition(s) of the word under your cursor.
-				map("gd", require("telescope.builtin").lsp_definitions, "[g]oto [d]efinition")
+				map("n", "gd", require("telescope.builtin").lsp_definitions, "[g]oto [d]efinition")
 				-- Find reference(s) for the word under your cursor.
-				map("gr", require("telescope.builtin").lsp_references, "[g]oto [r]eferences")
+				map("n", "gr", require("telescope.builtin").lsp_references, "[g]oto [r]eferences")
 				-- Jump to the implementation(s) of the word under your cursor.
-				map("gI", require("telescope.builtin").lsp_implementations, "[g]oto [I]mplementation")
+				map("n", "gI", require("telescope.builtin").lsp_implementations, "[g]oto [I]mplementation")
 				-- Jump to the type of the word under your cursor.
-				map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
+				map("n", "<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
 				-- Fuzzy find all the symbols in your current document.
-				map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[d]ocument [s]ymbols")
+				map("n", "<leader>ds", require("telescope.builtin").lsp_document_symbols, "[d]ocument [s]ymbols")
 				-- Similar to document symbols, except searches over your entire project.
-				map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[w]orkspace [s]ymbols")
+				map(
+					"n",
+					"<leader>ws",
+					require("telescope.builtin").lsp_dynamic_workspace_symbols,
+					"[w]orkspace [s]ymbols"
+				)
 				-- Rename the variable under your cursor.
-				map("<leader>rn", vim.lsp.buf.rename, "[r]e[n]ame")
+				map("n", "<leader>rn", vim.lsp.buf.rename, "[r]e[n]ame")
 				-- Execute a code action, usually your cursor needs to be on top of an error
 				-- or a suggestion from your LSP for this to activate.
-				map("<leader>ca", vim.lsp.buf.code_action, "[c]ode [a]ction")
+				map("n", "<leader>ca", vim.lsp.buf.code_action, "[c]ode [a]ction")
 				-- Opens a popup that displays documentation about the word under your cursor
-				map("K", vim.lsp.buf.hover, "Hover Documentation")
+				map("n", "K", vim.lsp.buf.hover, "Hover Documentation")
 				--  Goto declaration, in C this would take you to the header.
-				map("gD", vim.lsp.buf.declaration, "[g]oto [D]eclaration")
+				map("n", "gD", vim.lsp.buf.declaration, "[g]oto [D]eclaration")
 				-- The following two autocommands are used to highlight references of the hovered symbol
 				local client = vim.lsp.get_client_by_id(event.data.client_id)
 				if client and client.server_capabilities.documentHighlightProvider then
@@ -68,7 +72,7 @@ return {
 
 				if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
 					vim.lsp.inlay_hint.enable(true)
-					map("<leader>th", function()
+					map("n", "<leader>th", function()
 						vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
 					end, "[t]oggle Inlay [h]ints")
 				end
