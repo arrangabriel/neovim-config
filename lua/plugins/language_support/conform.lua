@@ -1,3 +1,5 @@
+local prettier = { { "prettierd", "prettier" } }
+
 return {
 	"stevearc/conform.nvim",
 	lazy = false,
@@ -25,6 +27,12 @@ return {
 			-- add these to the mason config to ensure their installation
 			-- TODO: add more
 			lua = { "stylua" },
+			javascript = prettier,
+			javascriptreact = prettier,
+			typescript = prettier,
+			typescriptreact = prettier,
+			css = prettier,
+			html = prettier,
 		},
 	},
 }

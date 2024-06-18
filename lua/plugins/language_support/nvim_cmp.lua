@@ -11,10 +11,12 @@ return {
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-path",
 		"hrsh7th/cmp-buffer",
+		"windwp/nvim-autopairs",
 	},
 	config = function()
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
+		local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 		luasnip.config.setup()
 
 		cmp.setup({
@@ -61,5 +63,8 @@ return {
 				{ name = "buffer" },
 			},
 		})
+
+		-- Autopairs setup
+		cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 	end,
 }
