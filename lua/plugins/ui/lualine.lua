@@ -22,16 +22,7 @@ local sections = {
 		{ navic_breadcrumbs },
 	},
 
-	lualine_x = {
-		{
-			"buffers",
-			icons_enabled = false,
-			mode = 2, -- Shows buffer name + buffer index
-			symbols = {
-				alternate_file = "",
-			},
-		},
-	},
+	lualine_x = {},
 	lualine_y = {
 		{
 			"branch",
