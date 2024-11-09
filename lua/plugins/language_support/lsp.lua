@@ -89,7 +89,12 @@ return {
 		-- settings (table): Override the default settings passed when initializing the server.
 		-- See `:help lspconfig-all` for a list of all the pre-configured LSPs
 		local servers = {
-			clangd = {},
+			clangd = {
+				cmd = {
+					"clangd",
+					"--offset-encoding=utf-16",
+				},
+			},
 			rust_analyzer = {},
 			pyright = {},
 			-- gopls = {},
@@ -102,7 +107,8 @@ return {
 					},
 				},
 			},
-			tsserver = {},
+			ocamllsp = {},
+			ts_ls = {},
 			eslint = {},
 		}
 
@@ -114,6 +120,7 @@ return {
 			"stylua", -- lua linter and formatter
 			"markdownlint", -- markdown linter
 			"prettierd",
+			"black", -- python formatter
 		})
 
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })

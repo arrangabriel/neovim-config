@@ -27,6 +27,7 @@ return {
 		-- add these to the mason config to ensure their installation
 		formatters_by_ft = {
 			lua = { "stylua" },
+			python = { "black" },
 			javascript = { prettier },
 			javascriptreact = { prettier },
 			typescript = { prettier },
