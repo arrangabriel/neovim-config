@@ -1,3 +1,5 @@
+local utils = require("utils")
+
 return {
 	"nvim-telescope/telescope.nvim",
 	branch = "0.1.x",
@@ -38,26 +40,27 @@ return {
 		pcall(telescope.load_extension, "ui-select")
 
 		local builtin = require("telescope.builtin")
-		vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[h]elp" })
-		vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[k]eymaps" })
-		vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[f]iles" })
-		vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "Telescope" })
-		vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "hovered [w]ord" })
-		vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[g]rep" })
-		vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[d]iagnostics" })
-		vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[r]esume" })
-		vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = 'recent Files ("." for repeat)' })
-		vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "existing buffers" })
 
-		vim.keymap.set("n", "<leader>/", function()
+		local map = utils.map_with_prefix("telescope: ")
+		map("n", "<leader>/", function()
 			builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
 				winblend = 10,
 				previewer = false,
 			}))
-		end, { desc = "[/] Fuzzily search in current buffer" })
+		end, "fuzzily search in current buffer")
+		map("n", "<leader>sr", builtin.resume, "[r]esume previous")
+		map("n", "<leader><leader>", builtin.buffers, "search existing buffers")
+		map("n", "<leader>sg", builtin.live_grep, "[g]rep")
+		map("n", "<leader>sf", builtin.find_files, "[f]iles")
 
-		vim.keymap.set("n", "<leader>sn", function()
+		map("n", "<leader>sh", builtin.help_tags, "[h]elp")
+		map("n", "<leader>sk", builtin.keymaps, "[k]eymaps")
+		map("n", "<leader>sd", builtin.diagnostics, "[d]iagnostics")
+		map("n", "<leader>sp", builtin.oldfiles, "[p]reviously opened")
+		map("n", "<leader>st", builtin.builtin, "[t]elescope pickers")
+
+		map("n", "<leader>sn", function()
 			builtin.find_files({ cwd = vim.fn.stdpath("config") })
-		end, { desc = "[n]eovim files" })
+		end, "[n]eovim files")
 	end,
 }
