@@ -33,3 +33,6 @@ utils.map_silent({ "n", "o", "x" }, "L", "$")
 utils.map("n", ">d", vim.diagnostic.goto_next, { desc = "Next [d]iagnostic" })
 utils.map("n", "<d", vim.diagnostic.goto_prev, { desc = "Prev [d]iagnostic" })
 utils.map("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [e]rror" })
+
+vim.keymap.del("n", "[d")
+vim.keymap.del("n", "]d")
