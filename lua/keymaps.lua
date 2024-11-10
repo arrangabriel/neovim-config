@@ -12,9 +12,6 @@ utils.map("n", "<Esc>", "<cmd>nohlsearch<CR>")
 utils.map("n", "n", "nzz")
 utils.map("n", "N", "Nzz")
 utils.map("n", "*", "*zz")
-utils.map("n", "#", "#zz")
-utils.map("n", "g*", "g*zz")
-utils.map("n", "g#", "g#zz")
 
 -- Stay in visual mode after (un)indenting
 utils.map("v", ">", ">gv")
@@ -29,8 +26,8 @@ utils.map({ "n", "x" }, "j", "gj")
 
 -- Move to start and end of line
 -- NOTE: might want to change these to 0 and $, currently whitespace is ignored
-utils.map({ "n", "o", "x" }, "H", "^")
-utils.map({ "n", "o", "x" }, "L", "g_")
+utils.map({ "n", "o", "x" }, "H", "0")
+utils.map({ "n", "o", "x" }, "L", "$")
 
 -- Diagnostic navigation
 utils.map("n", ">d", vim.diagnostic.goto_next, { desc = "Next [d]iagnostic" })

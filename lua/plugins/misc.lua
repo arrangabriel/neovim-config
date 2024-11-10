@@ -20,17 +20,8 @@ local which_key_config = {
 	},
 }
 
--- Various utility plugins
-local mini_config = {
-	"echasnovski/mini.nvim",
-	config = function()
-		require("mini.surround").setup()
-	end,
-}
-
 return {
 	which_key_config,
-	mini_config,
 	-- Repeat plugin actions with '.'
 	"tpope/vim-repeat",
 }
