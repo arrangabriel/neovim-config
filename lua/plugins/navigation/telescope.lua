@@ -42,14 +42,13 @@ return {
 		local builtin = require("telescope.builtin")
 
 		local map = utils.map_with_prefix("telescope: ")
-		map("n", "<leader>/", function()
+		map("n", "<leader><leader>", function()
 			builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
 				winblend = 10,
 				previewer = false,
 			}))
 		end, "fuzzily search in current buffer")
 		map("n", "<leader>sr", builtin.resume, "[r]esume previous")
-		map("n", "<leader><leader>", builtin.buffers, "search existing buffers")
 		map("n", "<leader>sg", builtin.live_grep, "[g]rep")
 		map("n", "<leader>sf", builtin.find_files, "[f]iles")
 
@@ -58,6 +57,7 @@ return {
 		map("n", "<leader>sd", builtin.diagnostics, "[d]iagnostics")
 		map("n", "<leader>sp", builtin.oldfiles, "[p]reviously opened")
 		map("n", "<leader>st", builtin.builtin, "[t]elescope pickers")
+		map("n", "<leader>sb", builtin.buffers, "open [b]uffers")
 
 		map("n", "<leader>sn", function()
 			builtin.find_files({ cwd = vim.fn.stdpath("config") })
