@@ -41,10 +41,6 @@ return {
 		"gbprod/nord.nvim",
 	},
 	config = function()
-		utils.map("n", "gb", function()
-			vim.cmd("LualineBuffersJump!" .. vim.v.count1)
-		end, { desc = "[g]oto [b]uffer" })
-
 		local bg = require("nord.colors").default_bg
 		local custom_nord = require("lualine.themes.nord")
 		local fg = custom_nord.normal.b.fg
