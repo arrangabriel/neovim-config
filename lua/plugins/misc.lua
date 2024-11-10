@@ -8,6 +8,23 @@ local which_key_config = {
 			{ "<leader>t", group = "[t]oggle" },
 			{ "<leader>g", group = "[g]oto" },
 		},
+		plugins = {
+			marks = true,
+			registers = true,
+			spelling = {
+				enabled = true,
+				suggestions = 10,
+			},
+			presets = {
+				windows = true,
+				z = true,
+				g = true,
+				operators = false,
+				motions = false,
+				text_objects = false,
+				nav = false,
+			},
+		},
 	},
 	keys = {
 		{
