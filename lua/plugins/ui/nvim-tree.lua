@@ -59,7 +59,7 @@ return {
 			on_attach = custom_on_attach,
 		})
 
-		local map = utils.map_with_prefix("nvim-tree:", { silent = true, noremap = true })
+		local map = utils.map_with_prefix("nvim-tree: ", { silent = true, noremap = true })
 		local api = require("nvim-tree.api")
 
 		map("n", "<leader>tf", api.tree.toggle, "[f]iles")
