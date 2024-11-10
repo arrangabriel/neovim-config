@@ -61,15 +61,6 @@ local which_key_config = {
 			return true
 		end,
 	},
-	keys = {
-		{
-			"<leader>?",
-			function()
-				require("which-key").show({ global = false })
-			end,
-			desc = "view buffer local keymaps",
-		},
-	},
 }
 
 return {
