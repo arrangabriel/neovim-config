@@ -1,12 +1,3 @@
-local utils = require("utils")
-
-local function navic_breadcrumbs()
-	if not require("nvim-navic").is_available() then
-		return ""
-	end
-	return require("nvim-navic").get_location()
-end
-
 local sections = {
 	lualine_a = {},
 	lualine_b = {
@@ -19,7 +10,6 @@ local sections = {
 	lualine_c = {
 		"diagnostics",
 		"diff",
-		{ navic_breadcrumbs },
 	},
 
 	lualine_x = {},
@@ -37,7 +27,6 @@ return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
-		"SmiteshP/nvim-navic",
 		"gbprod/nord.nvim",
 	},
 	config = function()
