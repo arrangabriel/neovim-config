@@ -14,3 +14,8 @@ This is my personal configuration for a nice Neovim experience.
 
 > Acknowledgments to the amazing
 > [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim)!
+
+## TODO
+
+- [ ] Use ø/æ as prev/next keybinds across the board
+- [ ] Add [trouble.nvim](https://github.com/folke/trouble.nvim)

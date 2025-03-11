@@ -40,17 +40,13 @@ return {
 			},
 		},
 		sort = { "alphanum", "local", "group", "mod" },
-		---@param mapping wk.Mapping
 		filter = function(mapping)
 			-- Hide silent mappings
 			if mapping.silent == 1 then
 				return false
 			end
 
-			local hidden = {
-				"&",
-				"Y",
-			}
+			local hidden = { "&", "Y" }
 			for _, key in ipairs(hidden) do
 				if mapping.lhs == key then
 					return false

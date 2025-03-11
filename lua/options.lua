@@ -6,6 +6,8 @@ vim.opt.relativenumber = true
 vim.opt.scrolloff = 10
 vim.opt.termguicolors = true
 
+vim.diagnostic.config({ virtual_text = true, signs = false })
+
 -- Copy and paste to system clipboard by default
 vim.opt.clipboard = "unnamedplus"
 

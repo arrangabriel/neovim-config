@@ -2,7 +2,7 @@ return {
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
 	opts = {
-		ensure_installed = { "c", "cpp", "rust", "lua", "kotlin" },
+		ensure_installed = { "c", "cpp", "rust", "lua", "kotlin", "markdown" },
 		auto_install = true,
 		highlight = { enable = true },
 		indent = { enable = true },
