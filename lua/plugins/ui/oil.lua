@@ -1,3 +1,4 @@
+-- TODO: Close after vertical or horizontal select.
 return {
 	"stevearc/oil.nvim",
 	opts = {
@@ -5,8 +6,8 @@ return {
 			["g?"] = { "actions.show_help", mode = "n" },
 			["<leader>o"] = "actions.close",
 			["<CR>"] = "actions.select",
-			["<S-CR>"] = { "actions.select", opts = { vertical = true } },
-			["<C-S-CR>"] = { "actions.select", opts = { horizontal = true } },
+			["<S-CR>"] = { "actions.select", opts = { vertical = true, close = true } },
+			["<C-S-CR>"] = { "actions.select", opts = { horizontal = true, close = true } },
 			["<C-p>"] = "actions.preview",
 			["<C-r>"] = "actions.refresh",
 			["<C-d>"] = { "actions.cd", mode = "n" },
