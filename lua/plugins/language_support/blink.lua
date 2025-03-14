@@ -3,6 +3,7 @@ return {
 	dependencies = {
 		"rafamadriz/friendly-snippets",
 		"xzbdmw/colorful-menu.nvim",
+		{ "folke/lazydev.nvim" },
 	},
 	version = "*",
 	---@module 'blink.cmp'
@@ -17,6 +18,12 @@ return {
 			["<C-d>"] = { "show_documentation" },
 			["<C-S-p>"] = { "scroll_documentation_up" },
 			["<C-S-n>"] = { "scroll_documentation_down" },
+		},
+		sources = {
+			default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+			providers = {
+				lazydev = { name = "LazyDev", module = "lazydev.integrations.blink", score_offset = 100 },
+			},
 		},
 		fuzzy = { implementation = "prefer_rust_with_warning" },
 		completion = {

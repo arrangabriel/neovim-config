@@ -11,7 +11,11 @@ return {
 		-- Status notifications
 		{ "j-hui/fidget.nvim", opts = {} },
 		-- Lua Neovim integration
-		{ "folke/lazydev.nvim", opts = {} },
+		{
+			"folke/lazydev.nvim",
+			ft = "lua", -- only load on lua files
+			opts = { library = { { path = "${3rd}/luv/library", words = { "vim%.uv" } } } },
+		},
 	},
 	config = function()
 		vim.api.nvim_create_autocmd("LspAttach", {
@@ -74,13 +78,25 @@ return {
 					})
 				end
 
+				local inlay_hint_default_off = {
+					"cpp",
+				}
+				local inlay_hints_default = not vim.tbl_contains(inlay_hint_default_off, vim.bo[event.buf].filetype)
 				if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
-					vim.lsp.inlay_hint.enable(true)
+					vim.lsp.inlay_hint.enable(inlay_hints_default)
 					map("n", "<leader>th", function()
-						vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
+						vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 					end, "inlay [h]ints")
 				end
 			end,
+		})
+
+		require("mason").setup()
+		require("mason-tool-installer").setup({
+			ensure_installed = {
+				"stylua",
+				"prettierd",
+			},
 		})
 
 		-- cmd (table): Override the default command used to start the server
@@ -95,9 +111,6 @@ return {
 					"--offset-encoding=utf-16",
 				},
 			},
-			rust_analyzer = {},
-			pyright = {},
-			-- gopls = {},
 			lua_ls = {
 				settings = {
 					Lua = {
@@ -107,32 +120,21 @@ return {
 					},
 				},
 			},
-			ocamllsp = {},
-			ts_ls = {},
-			eslint = {},
+			pyright = {},
+			rust_analyzer = {},
+			marksman = {},
 		}
 
-		require("mason").setup()
-
-		-- Add other tools (linters, formatters, etc.) for Mason to install
-		local ensure_installed = vim.tbl_keys(servers or {})
-		vim.list_extend(ensure_installed, {
-			"stylua", -- lua linter and formatter
-			"markdownlint", -- markdown linter
-			"prettierd",
-			"black", -- python formatter
-		})
-
-		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
-
 		require("mason-lspconfig").setup({
+			ensure_installed = vim.tbl_keys(servers),
 			handlers = {
 				function(server_name)
-					local server = servers[server_name] or {}
-					server.capabilities = require("blink.cmp").get_lsp_capabilities(server.capabilities)
-					require("lspconfig")[server_name].setup(server)
+					local server_opts = servers[server_name] or {}
+					server_opts.capabilities = require("blink.cmp").get_lsp_capabilities(server_opts.capabilities)
+					require("lspconfig")[server_name].setup(server_opts)
 				end,
 			},
+			automatic_installation = false,
 		})
 	end,
 }
