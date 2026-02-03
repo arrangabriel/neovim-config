@@ -9,14 +9,28 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 -- Set buffer local variable if file is in git repository
 vim.api.nvim_create_autocmd("BufReadPost", {
-    desc = "Set vim.b.git_root if file is in git repository",
-    group = vim.api.nvim_create_augroup("set-git-root", { clear = true }),
-    callback = function()
-        local git_root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
-        if vim.v.shell_error == 0 then
-            vim.b.git_root = git_root
-        else
-            vim.b.git_root = nil
+	desc = "Set vim.b.git_root if file is in git repository",
+	group = vim.api.nvim_create_augroup("set-git-root", { clear = true }),
+	callback = function()
+		local git_root = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
+		if vim.v.shell_error == 0 then
+			vim.b.git_root = git_root
+		else
+			vim.b.git_root = nil
+		end
+	end,
+})
+
+-- Change to directory of opened file on startup
+vim.api.nvim_create_autocmd("VimEnter", {
+    desc = "Change to passed directory when vim starts",
+	group = vim.api.nvim_create_augroup("group_cdpwd", { clear = true }),
+	pattern = "*",
+	callback = function()
+        local path = vim.fn.expand("%:h")
+        if vim.startswith(path, "oil://") then
+            path = string.sub(path, 7)
         end
-    end,
+		vim.api.nvim_set_current_dir(path)
+	end,
 })
