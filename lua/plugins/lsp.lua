@@ -9,7 +9,17 @@ local setup_lsp_keybinds = function(event)
 		vim.lsp.buf.hover({ border = "single" })
 	end, "hover documentation")
 	map("n", "<leader>gd", vim.lsp.buf.definition, "[d]efinition")
-	map("n", "<leader>gr", vim.lsp.buf.references, "[r]eferences")
+	map("n", "<leader>gr", function()
+		vim.lsp.buf.references(nil, {
+			on_list = function(items, title, context)
+				require("trouble").open("lsp_references", {
+					items = items,
+					title = title,
+					context = context,
+				})
+			end,
+		})
+	end, "[r]eferences")
 	--  In C this would take you to the header.
 	map("n", "<leader>gD", vim.lsp.buf.declaration, "[D]eclaration")
 	map("n", "<leader>gi", vim.lsp.buf.implementation, "[i]mplementations")
@@ -70,6 +80,7 @@ return {
 	"neovim/nvim-lspconfig",
 	dependencies = {
 		{ "j-hui/fidget.nvim", opts = {} }, -- LSP status notifications
+        "folke/trouble.nvim", -- LSP diagnostics list
 	},
 	config = function()
 		vim.lsp.enable("ts_ls")

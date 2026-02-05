@@ -1,5 +1,5 @@
 return {
-	"ggandor/leap.nvim",
+	"https://codeberg.org/andyg/leap.nvim",
 	dependencies = { "tpope/vim-repeat" },
 	config = function()
 		vim.api.nvim_set_hl(0, "LeapBackdrop", { link = "Comment" })
