@@ -12,7 +12,7 @@ local setup_lsp_keybinds = function(event)
 	map("n", "<leader>gr", function()
 		vim.lsp.buf.references(nil, {
 			on_list = function(items, title, context)
-				require("trouble").open("lsp_references", {
+				require("trouble").open({ mode = "lsp_references", focus = true, auto_refresh = false }, {
 					items = items,
 					title = title,
 					context = context,
@@ -80,7 +80,7 @@ return {
 	"neovim/nvim-lspconfig",
 	dependencies = {
 		{ "j-hui/fidget.nvim", opts = {} }, -- LSP status notifications
-        "folke/trouble.nvim", -- LSP diagnostics list
+		"folke/trouble.nvim", -- LSP diagnostics list
 	},
 	config = function()
 		vim.lsp.enable("ts_ls")
