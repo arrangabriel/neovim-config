@@ -1,5 +1,3 @@
--- TODO: Change c-h keybind
-
 return {
 	"stevearc/oil.nvim",
 	---@Module "oil"
@@ -14,7 +12,7 @@ return {
 			["<CR>"] = "actions.select",
 			["<leader>o"] = "actions.close",
 			["<C-v>"] = { "actions.select", opts = { vertical = true, close = true } },
-			["<C-b>"] = { "actions.select", opts = { horizontal = true, close = true } },
+			["<C-s>"] = { "actions.select", opts = { horizontal = true, close = true } },
 			["<C-p>"] = "actions.preview",
 			["<C-c>"] = { "actions.close", mode = "n" },
 			["-"] = { "actions.parent", mode = "n" },
